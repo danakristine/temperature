@@ -6,10 +6,13 @@ import time
 from adafruit_st7789 import ST7789
 from adafruit_display_text import label
 
+#variables
 i2c = board.I2C()
 pht = MS8607(i2c)
+
 print(pht.pressure)
 pressure_str = str(pht.pressure) + " hPa "
+
 print(pht.relative_humidity)
 humidity = (int(pht.relative_humidity * 100)) / 100
 humidity_str = str(humidity) + "% "
@@ -21,7 +24,6 @@ print(farenh_str)
 
 
 #display content
-background_color = 0xFADADD
 displayio.release_displays()
 spi = board.SPI()
 tft_cs = board.D3
@@ -31,10 +33,6 @@ display = ST7789(dbus, rotation = 270, width = 240, height = 135, rowstart = 40,
 screen = displayio.Group()
 display.root_group = screen 
 my_bitmap = displayio.Bitmap(240, 135, 1)
-my_palette = displayio.Palette(1)
-my_palette[0] = background_color
-tile_grid = displayio.TileGrid(my_bitmap, pixel_shader = my_palette, x = 0, y = 0)
-screen.append(tile_grid)
 
 #word
 pressW = pressure_str + " hPa"
