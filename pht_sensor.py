@@ -11,15 +11,15 @@ i2c = board.I2C()
 pht = MS8607(i2c)
 
 print(pht.pressure)
-pressure_str = str(pht.pressure) + " hPa "
+#pressure_str = str(pht.pressure) + " hPa "
 
 print(pht.relative_humidity)
 humidity = (int(pht.relative_humidity * 100)) / 100
-humidity_str = str(humidity) + "% "
+#humidity_str = str(humidity) + "% "
 
 farenh = (9/5) * pht.temperature + 32
 farenh = (int(farenh * 100)) / 100
-farenh_str = str(farenh) + " deg F"
+#farenh_str = str(farenh) + " deg F"
 print(farenh_str)
 
 
