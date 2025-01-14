@@ -9,19 +9,11 @@ from adafruit_display_text import label
 #variables
 i2c = board.I2C()
 pht = MS8607(i2c)
-
-print(pht.pressure)
-#pressure_str = str(pht.pressure) + " hPa "
-
-print(pht.relative_humidity)
-humidity = (int(pht.relative_humidity * 100)) / 100
-#humidity_str = str(humidity) + "% "
-
 farenh = (9/5) * pht.temperature + 32
-farenh = (int(farenh * 100)) / 100
-#farenh_str = str(farenh) + " deg F"
-print(farenh_str)
 
+#function
+def noDecimal(y):
+    (int(y * 100)) / 100
 
 #display content
 displayio.release_displays()
@@ -35,18 +27,24 @@ display.root_group = screen
 my_bitmap = displayio.Bitmap(240, 135, 1)
 
 #word
-pressW = pressure_str + " hPa"
+#pressW = str(pht.pressure) + " hPa"
 text_color = 0xFF69B4
 FONTSCALE = 2
-text_area = label.Label(terminalio.FONT, text=pressW, color=text_color)
+text_area = label.Label(terminalio.FONT, text=none, color=text_color)
 text_width = text_area.bounding_box[2] * FONTSCALE
 text_group = displayio.Group(scale=FONTSCALE, x=60, y=70)
 text_group.append(text_area)
 screen.append(text_group)
 
-temps = [pressure_str, humidity_str, farenh_str]
 
+x = 0
 while True:
-    for temp in temps:
-        text_area.text = temp
-        time.sleep(3)
+    if x==0:
+        text_area.text = str(pht.pressure) + " hPa"
+    x += 1
+    elif x==1:
+        text_area.text = str(noDecimal(pht.relative_humdity)) + " %"
+    x += 1
+    elif x==2:
+        text_area.text = str(noDecimal(farenh)) + " deg F"
+    x = 0
