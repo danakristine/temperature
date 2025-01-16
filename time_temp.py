@@ -28,6 +28,6 @@ while True:
     if time.monotonic() - curr_time2 >= INTERVAL2:
         curr_time2 = time.monotonic()
         print(f'Pressure {pht.temperature:.2f} hPa')
-        print(f'Temperature {(pht.temperature * 9 /5 + 32):.2f} def F')
+        print(f'Temperature {(pht.temperature * 9 /5 + 32):.2f} deg F')
         print(f'Humidity {pht.relative_humidity:.2f}%')
         
